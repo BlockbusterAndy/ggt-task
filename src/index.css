@@ -22,3 +22,10 @@
 .font-kreon {
     font-family: 'Kreon', serif;
 }
+
+.puzzle-bg {
+    background: url('../images/puzzle-bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { GameContext } from "../../contexts/gameContext";
 
 const Question = () => {
   const shapes = [
@@ -8,9 +9,9 @@ const Question = () => {
     { id: 3, name: "Triangle", image: "/images/shapes/triangle.png", answer: "Triangle", options: ["Circle", "Square", "Triangle", "Oval"] },
   ];
 
+  const Config = useContext(GameContext);
   const [currentShape, setCurrentShape] = useState(shapes[0]);
   const [answer, setAnswer] = useState("");
-  const [ isCorrect, setIsCorrect ] = useState(false);
 
   const getNextShape = () => {
     let randomIndex;
@@ -25,7 +26,12 @@ const Question = () => {
   const handleAnswer = (selectedOption) => {
     setAnswer(selectedOption);
     if (selectedOption === currentShape.answer) {
-      setTimeout(getNextShape, 500);
+      Config.setGameConfig((prev) => ({ ...prev, score: prev.score + 1, isCorrect: true }));
+      setTimeout(getNextShape, 1000);
+      console.log(Config.gameConfig.score);
+    } else {
+      Config.setGameConfig((prev) => ({ ...prev, isCorrect: false }));
+      setTimeout(getNextShape, 1000);
     }
   };
 
@@ -62,6 +68,23 @@ const Question = () => {
             {index + 1}. {option}
           </button>
         ))}
+      </div>
+
+      <div className="pt-4">
+        <p className="font-kreon text-white text-base">Your Score: {Config.gameConfig.score}</p>
+        <AnimatePresence mode="wait">
+          {answer && answer !== currentShape.answer && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            className="font-kreon text-red-500 text-sm mt-2"
+            >
+              Incorrect! Try again.
+            </motion.p>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
