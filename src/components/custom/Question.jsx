@@ -24,20 +24,29 @@ const Question = () => {
   };
 
   const handleAnswer = (selectedOption) => {
-    setAnswer(selectedOption);
-    if (selectedOption === currentShape.answer) {
-      Config.setGameConfig((prev) => ({ ...prev, score: prev.score + 1, isCorrect: true }));
-      setTimeout(getNextShape, 1000);
-      console.log(Config.gameConfig.score);
-    } else {
-      Config.setGameConfig((prev) => ({ ...prev, isCorrect: false }));
-      setTimeout(getNextShape, 1000);
+    try {
+      setAnswer(selectedOption);
+      if (selectedOption === currentShape.answer) {
+        Config.setGameConfig((prev) => ({ ...prev, score: prev.score + 1, isCorrect: true }));
+        setTimeout(getNextShape, 1000);
+      } else {
+        Config.setGameConfig((prev) => ({ ...prev, isIncorrect: true }));
+        setTimeout(getNextShape, 1000);
+      }
+    } catch (error) {
+      console.error("Error in handleAnswer:", error);
+    } finally {
+      setTimeout(() => {
+        console.log("⏳ Delaying Reset... Allowing Exit Animation");
+        Config.setGameConfig((prev) => ({ ...prev, isCorrect: false, isIncorrect: false }));
+      }, 2000);
     }
   };
-
+  
+  
   return (
     <div className="flex flex-col justify-center items-center">
-      <h2 className="font-kreon font-semibold text-xl text-white pt-8 pb-6">
+      <h2 className="font-kreon font-semibold text-xl text-white pt-4 pb-6">
         Which shape is this?
       </h2>
       

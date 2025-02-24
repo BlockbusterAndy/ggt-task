@@ -2,7 +2,7 @@ const StarsBackground = () => {
   return (
     <div className="absolute top-0 left-0 w-full h-screen overflow-hidden -z-5">
       {/* Top Stars */}
-      <div className="w-full px-4 md:h-1/2 md:flex justify-center items-center pt-14">
+      <div className="w-full px-4 md:h-1/2 md:flex justify-center items-center pt-4">
         <img 
           src="/images/stars-bg-1.png" 
           alt="stars" 
