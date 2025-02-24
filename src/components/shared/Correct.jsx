@@ -15,8 +15,8 @@ const Correct = (props) => {
     >
       <motion.h2
         className="font-coiny font-lg text-center text-4xl text-white pt-10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        initial={{ opacity: 0, y: 300 }}
+        animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
       >
@@ -44,7 +44,7 @@ const Correct = (props) => {
         </motion.div>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full">
+      <div className="absolute bottom-0 left-0 w-full flex justify-center items-center">
         <img src="/images/clouds.png" alt="clouds" />
       </div>
     </motion.div>

@@ -23,16 +23,39 @@ const Question = () => {
     setCurrentShape(shapes[randomIndex]);
   };
 
+  const handleScore = (updatedScore, updatedCount) => {
+    if (updatedScore === 9 && updatedCount === 9) {
+      Config.setGameConfig((prev) => ({ ...prev, isWon: true }));
+      // console.log("You won the game!");
+    } else if (updatedCount === 9 && updatedScore < 9) {
+      Config.setGameConfig((prev) => ({ ...prev, isGameOver: true }));
+      // console.log("Game Over!");
+    } else {
+      console.log("Game continues...");
+    }
+  };
+  
   const handleAnswer = (selectedOption) => {
     try {
       setAnswer(selectedOption);
-      if (selectedOption === currentShape.answer) {
-        Config.setGameConfig((prev) => ({ ...prev, score: prev.score + 1, isCorrect: true }));
-        setTimeout(getNextShape, 1000);
-      } else {
-        Config.setGameConfig((prev) => ({ ...prev, isIncorrect: true }));
-        setTimeout(getNextShape, 1000);
-      }
+      Config.setGameConfig((prev) => {
+        const isCorrect = selectedOption === currentShape.answer;
+        const updatedScore = isCorrect ? prev.score + 1 : prev.score;
+        const updatedCount = prev.count + 1;
+  
+        // Call handleScore with updated values
+        setTimeout(() => handleScore(updatedScore, updatedCount), 1000);
+  
+        return {
+          ...prev,
+          score: updatedScore,
+          count: updatedCount,
+          isCorrect: isCorrect,
+          isIncorrect: !isCorrect,
+        };
+      });
+  
+      setTimeout(getNextShape, 1000);
     } catch (error) {
       console.error("Error in handleAnswer:", error);
     } finally {
@@ -81,19 +104,6 @@ const Question = () => {
 
       <div className="pt-4">
         <p className="font-kreon text-white text-base">Your Score: {Config.gameConfig.score}</p>
-        <AnimatePresence mode="wait">
-          {answer && answer !== currentShape.answer && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-            className="font-kreon text-red-500 text-sm mt-2"
-            >
-              Incorrect! Try again.
-            </motion.p>
-          )}
-        </AnimatePresence>
       </div>
     </div>
   );
