@@ -28,7 +28,7 @@ const ImageRevealPuzzle = () => {
   return (
     <div className="flex flex-col items-center gap-4">
       
-      <div className="relative w-[200px] h-[200px]">
+      <div className="relative w-[200px] h-[200px] md:w-[300px] md:h-[300px]">
         {/* Main Image */}
         <img 
           src="/images/moon.png" 

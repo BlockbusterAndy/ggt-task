@@ -14,11 +14,15 @@ const Game = () => {
   useEffect(() => {
     if (gameConfig.isWon) {
       console.log("You won the game!");
-      navigate("/game-end");
+      setTimeout(() => {
+        navigate("/game-end");
+      }, 1700);
     }
     if (gameConfig.isGameOver) {
       console.log("Game Over!");
-      navigate("/game-end");
+      setTimeout(() => {
+        navigate("/game-end");
+      }, 1700);
     }
   }, [gameConfig.isWon, gameConfig.isGameOver, navigate]);
 
@@ -30,14 +34,16 @@ const Game = () => {
         {/* <InCorrect key={gameConfig.score} /> */}
       </AnimatePresence>
       <div className="flex flex-col justify-center items-center pt-20">
-        <h1 className="text-2xl text-white text-center font-coiny">
+        <h1 className="text-2xl md:text-4xl text-white text-center font-coiny">
           Mystery Blocks
         </h1>
-        <div className="pt-2">
-          <Question />
-        </div>
-        <div className="pt-2">
-          <Puzzle />
+        <div className="flex flex-col justify-center items-center md:gap-10">
+          <div className="pt-2">
+            <Question />
+          </div>
+          <div className="pt-2">
+            <Puzzle />
+          </div>
         </div>
       </div>
     </section>

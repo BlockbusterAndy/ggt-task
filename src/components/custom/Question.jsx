@@ -69,7 +69,7 @@ const Question = () => {
   
   return (
     <div className="flex flex-col justify-center items-center">
-      <h2 className="font-kreon font-semibold text-xl text-white pt-4 pb-6">
+      <h2 className="font-kreon font-semibold text-xl md:text-2xl text-white pt-4 pb-6 md:px-10">
         Which shape is this?
       </h2>
       
@@ -79,11 +79,12 @@ const Question = () => {
             key={currentShape.id}
             src={currentShape.image}
             alt={currentShape.name}
-            className="w-32 h-32"
+            className="w-32 h-32 md:w-42 md:h-42"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.5 }}
+            
           />
         </AnimatePresence>
       </div>
@@ -103,7 +104,7 @@ const Question = () => {
       </div>
 
       <div className="pt-4">
-        <p className="font-kreon text-white text-base">Your Score: {Config.gameConfig.score}</p>
+        <p className="font-kreon text-white text-base md:text-xl">Your Score: {Config.gameConfig.score}</p>
       </div>
     </div>
   );

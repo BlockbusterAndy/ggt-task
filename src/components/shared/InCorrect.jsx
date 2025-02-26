@@ -21,16 +21,20 @@ const InCorrect = () => {
             </motion.h2>
             <img src="/images/astronaut-2.png" alt="astronaut" className="h-[320px] z-20" />
             <motion.div
-                className="absolute bottom-35 flex justify-between w-full px-4 z-20"
+                className="absolute bottom-35 flex justify-between md:justify-around w-full px-4 md:px-24 z-20"
                 initial={{opacity: 0 }}
                 animate={{opacity: 1 }}
                 >
-                <img src="/images/rocket.png" alt="rocket" className="h-[140px]" />
-                <img src="/images/rocket.png" alt="rocket" className="h-[140px]" />
+                <img src="/images/rocket.png" alt="rocket" className="h-[140px] md:h-[220px]" />
+                <img src="/images/rocket.png" alt="rocket" className="h-[140px] md:h-[220px]" />
             </motion.div>
         </div>
         <div className="absolute bottom-0 left-0 w-full flex justify-center items-center">
-            <img src="/images/clouds.png" alt="clouds" />
+          <img 
+              src="/images/clouds-3.png" 
+              alt="clouds"  
+              className="w-full h-[170px] md:h-full object-cover"
+            />
         </div>
     </motion.div>
   );

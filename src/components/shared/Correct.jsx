@@ -34,18 +34,22 @@ const Correct = (props) => {
           transition={{ duration: 2, ease: "easeOut", delay: 0.5 }}
         />
         <motion.div
-          className="flex justify-between w-full px-6"
+          className="flex justify-between md:justify-evenly w-full px-4 md:px-24 z-20"
           initial={{ y: 0, opacity: 1 }}
           animate={{ y: -400, opacity: 1 }}
           transition={{ duration: 2, ease: "easeInOut", delay: 0.5 }}
         >
-          <img src="/images/rocket.png" alt="rocket" className="h-[120px]" />
-          <img src="/images/rocket.png" alt="rocket" className="h-[120px]" />
+          <img src="/images/rocket.png" alt="rocket" className="h-[120px] md:h-[220px]" />
+          <img src="/images/rocket.png" alt="rocket" className="h-[120px] md:h-[220px]" />
         </motion.div>
       </div>
 
       <div className="absolute bottom-0 left-0 w-full flex justify-center items-center">
-        <img src="/images/clouds.png" alt="clouds" />
+        <img 
+              src="/images/clouds-3.png" 
+              alt="clouds"  
+              className="w-full h-[170px] md:h-full object-cover"
+        />
       </div>
     </motion.div>
   );
